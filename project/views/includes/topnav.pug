@@ -1,0 +1,20 @@
+nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  a.navbar-brand(href='/') RealMyTrip
+  button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation')
+    span.navbar-toggler-icon
+  #navbarNav.collapse.navbar-collapse
+    ul.navbar-nav.ml-auto
+      li.nav-item
+        a.nav-link(href='/tours').active 투어
+      li.nav-item
+        a.nav-link(href='/book').active 예약확인
+      if (!currentUser)
+        li.nav-item
+          a.nav-link(href='/signin') 로그인
+        li.nav-item
+          a.nav-link(href='/users/new') 회원가입
+      else
+        li.nav-item
+          a.nav-link(href=`/users/${currentUser._id}`) 정보 수정
+        li.nav-item
+          a.nav-link(href='/signout') 로그아웃

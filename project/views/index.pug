@@ -1,0 +1,29 @@
+extends layout
+
+block content
+
+  #carouselExampleControls.carousel.slide(data-ride='carousel', style='width: 40em; margin: 0 auto;')
+    .carousel-inner
+      .carousel-item.active(data-interval='2000')
+        img.d-block.w-100(src='/images/barcelona.jpg', alt='barcelona')
+      .carousel-item(data-interval='2000')
+        img.d-block.w-100(src='/images/boracay.jpg', alt='boracay')
+      .carousel-item(data-interval='2000')
+        img.d-block.w-100(src='/images/hongkong.jpg', alt='hongkong')
+      .carousel-item(data-interval='2000')
+        img.d-block.w-100(src='/images/japan.jpg', alt='japan')
+      .carousel-item(data-interval='2000')
+        img.d-block.w-100(src='/images/london.jpg', alt='london')
+      .carousel-item(data-interval='2000')
+        img.d-block.w-100(src='/images/macau.jpg', alt='macau')
+      .carousel-item(data-interval='2000')
+        img.d-block.w-100(src='/images/paris.jpg', alt='paris')
+      .carousel-item(data-interval='2000')
+        img.d-block.w-100(src='./images/taiwan.jpg', alt='taiwan')
+    a.carousel-control-prev(href='#carouselExampleControls', role='button', data-slide='prev')
+      span.carousel-control-prev-icon(aria-hidden='true')
+      span.sr-only Previous
+    a.carousel-control-next(href='#carouselExampleControls', role='button', data-slide='next')
+      span.carousel-control-next-icon(aria-hidden='true')
+      span.sr-only Next
+  p.h1 어디로 떠나세요?

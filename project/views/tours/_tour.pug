@@ -1,0 +1,17 @@
+.content= tour.content
+.tags.badges
+  each tag in tour.tags
+    span.badge.badge-phill.badge-secondary= tag
+    | 
+.row
+  .col-sm
+    .numbers.
+      #[span.number.num-votes= tour.numLikes] likes,
+      #[span.number.num-answers= tour.numAnswers] answers,
+      #[span.number.num-views= tour.numReads] reads
+  .col-sm
+    .author
+      | asked on #{moment(tour.createdAt).format('YYYY-MM-DD')}
+      if tour.author
+        | 
+        | by #[a(href=`/users/${tour.author.id}`)= tour.author.name] 
