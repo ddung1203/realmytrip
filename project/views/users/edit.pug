@@ -19,6 +19,10 @@ block content
       .form-group
         label(for='password_confirmation') 비밀번호 확인
         input.form-control(type='password', id='password_confirmation', name='password_confirmation', placeholder='Password Confirmation')
+      .form-group
+        label(for='grade') 등급
+        input.form-control(type='text', id='grade', name='grade', placeholder='Type your grade(사용자, 가이드, 관리자)')
+        
       a.btn.btn-outline-secondary(href='javascript:window.history.back();') 뒤로가기 
       | 
       button.btn.btn-primary(type='submit') 확인

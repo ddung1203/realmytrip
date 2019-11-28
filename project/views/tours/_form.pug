@@ -4,6 +4,9 @@
 .form-group
   label(for="tour") Tour
   textarea.form-control(name="content", rows="5")= tour.content
+-form-group
+  label(for="img") Img
+  input.form-control(type="file", name="img")
 .form-group
   label(for="tags") Tags
   input.form-control(type="text", name="tags", placeholder="tags separated by spaces", value=tour.tags ? tour.tags.join(" ") : "")

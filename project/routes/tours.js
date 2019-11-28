@@ -5,6 +5,10 @@ const catchErrors = require('../lib/async-error');
 
 const router = express.Router();
 
+const multer = require('multer');
+const fs = require('fs-extra');
+const path = require('path');
+
 // 동일한 코드가 users.js에도 있습니다. 이것은 나중에 수정합시다.
 function needAuth(req, res, next) {
   if (req.isAuthenticated()) {//이 함수가 참이면 로그인된, 거짓이면 안된
@@ -28,26 +32,6 @@ router.get('/', catchErrors(async (req, res, next) => {
       {content: {'$regex': term, '$options': 'i'}}
     ]};//이런거 들어있는거 찾는거, i가 대소문자 안가린다
   }
-/*
-  page = 5
-
-  startNo = (page - 1) * 10;
-  totalNum = await this.post.count();
-  posts = await this.post.find({}).ski(sartNo).limit(10);
-  totalPage = Math.ceil(totalNum / 10)(올림함수)
-  
-  for i - 1 to  totalPage --> 이러면 1-10000 다나올 수 있음
-    a(href = '/posts?page=$(i)') = i
-
-
-  1,10 --> 1
-  11, 20 --> 2
-
-  ==> 이런걸 일일히 짜기 귀찮으니 mongoose-paginate 궁금하면봐
-*/
-
-
-
 
   const tours = await Tour.paginate(query, {//무시하고 find라고 생각하셈
     sort: {createdAt: -1}, //최신글 먼저보이게
@@ -91,13 +75,28 @@ router.put('/:id', catchErrors(async (req, res, next) => {
   res.redirect('/tours');
 }));
 
+
 router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {
   await Tour.findOneAndRemove({_id: req.params.id});
   req.flash('success', 'Successfully deleted');
   res.redirect('/tours');
 }));
-
-router.post('/', needAuth, catchErrors(async (req, res, next) => {//몽고에서 고유의 아이디를 주기에......
+  const mimetypes = {
+    "image/jpeg": "jpg",
+    "image/gif": "gif",
+    "image/png": "png"
+  };
+  const upload = multer({
+    dest: 'tmp',
+    fileFilter: (req, file, cb) => {
+      var ext = mimetypes[file.mimetype];
+      if (!ext) {
+        return cb(new Error('Only image files are allowed!'), false)
+      }
+      cb(null, true);
+    }
+  });
+router.post('/', needAuth, upload.single('img'), catchErrors(async (req, res, next) => {//몽고에서 고유의 아이디를 주기에......
   const user = req.user;
   var tour = new Tour({
     title: req.body.title,
@@ -105,6 +104,13 @@ router.post('/', needAuth, catchErrors(async (req, res, next) => {//몽고에서
     content: req.body.content,
     tags: req.body.tags.split(" ").map(e => e.trim()),
   });
+  if (req.file) {
+    const dest = path.join(__dirname, '../public/images/uploads/');
+    console.log("File ->", req.file);
+    const filename = req.file.filename + "." + mimetypes[req.file.mimetype];
+    await fs.move(req.file.path, dest + filename);
+    tour.img = "/images/uploads/" + filename;
+  }
   await tour.save();
   req.flash('success', 'Successfully posted');
   res.redirect('/tours');
@@ -113,6 +119,8 @@ router.post('/', needAuth, catchErrors(async (req, res, next) => {//몽고에서
 router.post('/:id/answers', needAuth, catchErrors(async (req, res, next) => {
   const user = req.user;
   const tour = await Tour.findById(req.params.id);
+
+
 
   if (!tour) {
     req.flash('danger', 'Not exist tour');

@@ -5,11 +5,13 @@ block content
     h1.main-title= tour.title
 
     .tour.show
+      if tour.img
+        img.img-fluid(src= tour.img)
       include _tour
 
       .buttons
         button.btn.btn-primary #[i.fa.fa-thumbs-up] Like
-        if currentUser && tour.author.id == currentUser.id
+        if currentUser && currentUser.grade == '가이드'
           | 
           a.btn.btn-outline-secondary(href=`/tours/${tour.id}/edit`) Edit
           | 

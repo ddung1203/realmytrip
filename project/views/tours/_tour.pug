@@ -11,7 +11,7 @@
       #[span.number.num-views= tour.numReads] reads
   .col-sm
     .author
-      | asked on #{moment(tour.createdAt).format('YYYY-MM-DD')}
+      | posted on #{moment(tour.createdAt).format('YYYY-MM-DD')}
       if tour.author
         | 
         | by #[a(href=`/users/${tour.author.id}`)= tour.author.name] 

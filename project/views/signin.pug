@@ -12,9 +12,8 @@ block content
         label.sr-only(for='password') Password
         input(
           type='password', id='password', name='password', class='form-control', placeholder='비밀번호', required, autofocus)
-        p
-        button.btn.btn-primary(type='submit') 로그인
-        | 
-        a.btn.btn-secondary(href='/auth/facebook')
+        button.btn.btn-primary.btn-block(type='submit') 로그인
+        a.btn.btn-dark.btn-block(href='/auth/facebook')
           i.fa.fa-facebook.fa-lg
-          |Facebook으로 로그인하기
+          | &nbsp;
+          | 페이스북으로 로그인

@@ -1,29 +1,34 @@
 extends layout
 
 block content
+  .resize
 
   #carouselExampleControls.carousel.slide(data-ride='carousel', style='width: 40em; margin: 0 auto;')
     .carousel-inner
       .carousel-item.active(data-interval='2000')
-        img.d-block.w-100(src='/images/barcelona.jpg', alt='barcelona')
+        img.d-block.w-100(src='/images/barcelona.jpg', alt='barcelona', max-width= '100%')
       .carousel-item(data-interval='2000')
-        img.d-block.w-100(src='/images/boracay.jpg', alt='boracay')
+        img.d-block.w-100(src='/images/boracay.jpg', alt='boracay', max-width= '100%')
       .carousel-item(data-interval='2000')
-        img.d-block.w-100(src='/images/hongkong.jpg', alt='hongkong')
+        img.d-block.w-100(src='/images/hongkong.jpg', alt='hongkong', max-width= '100%')
       .carousel-item(data-interval='2000')
-        img.d-block.w-100(src='/images/japan.jpg', alt='japan')
+        img.d-block.w-100(src='/images/japan.jpg', alt='japan', max-width= '100%')
       .carousel-item(data-interval='2000')
-        img.d-block.w-100(src='/images/london.jpg', alt='london')
+        img.d-block.w-100(src='/images/london.jpg', alt='london', max-width= '100%')
       .carousel-item(data-interval='2000')
-        img.d-block.w-100(src='/images/macau.jpg', alt='macau')
+        img.d-block.w-100(src='/images/macau.jpg', alt='macau', max-width= '100%')
       .carousel-item(data-interval='2000')
-        img.d-block.w-100(src='/images/paris.jpg', alt='paris')
+        img.d-block.w-100(src='/images/paris.jpg', alt='paris', max-width= '100%')
       .carousel-item(data-interval='2000')
-        img.d-block.w-100(src='./images/taiwan.jpg', alt='taiwan')
+        img.d-block.w-100(src='./images/taiwan.jpg', alt='taiwan', max-width= '100%')
     a.carousel-control-prev(href='#carouselExampleControls', role='button', data-slide='prev')
       span.carousel-control-prev-icon(aria-hidden='true')
       span.sr-only Previous
     a.carousel-control-next(href='#carouselExampleControls', role='button', data-slide='next')
       span.carousel-control-next-icon(aria-hidden='true')
       span.sr-only Next
-  p.h1 어디로 떠나세요?
+
+  
+  form.form-inline.search-input-group(action='/tours', method='GET')
+    i.fa.fa-search
+    input.form-control.mr-sm-2(type='text', name='term', placeholder='여행지나 상품을 검색해보세요!', aria-label='Search', value=term)

@@ -6,7 +6,7 @@ block content
   .container
     form.form-inline.search-input-group(action='/tours', method='GET')
       i.fa.fa-search
-      input.form-control.mr-sm-2(type='text', name='term', placeholder='Search', aria-label='Search', value=term)
+      input.form-control.mr-sm-2(type='text', name='term', placeholder='여행지나 상품명을 검색해보세요!', aria-label='Search', value=term)
 
     h1.main-title 
       | Tours
@@ -25,4 +25,5 @@ block content
       +paginate(tours, '/tours', query)
 
     hr
-    a.btn.btn-primary(href='/tours/new') Ask Tour
+    if currentUser && currentUser.grade == '가이드'
+      a.btn.btn-primary(href='/tours/new') Post Tour
