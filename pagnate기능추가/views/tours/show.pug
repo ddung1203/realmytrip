@@ -1,0 +1,37 @@
+extends ../layout
+
+block content
+  .container
+    h1.main-title= tour.title
+
+    .tour.show
+      if tour.img
+        img.img-fluid(src= tour.img)
+      include _tour
+
+      .buttons
+        if currentUser
+          button.btn.btn-primary.tour-like-btn(data-id=tour.id) 
+            span.for-loading #[i.fa.fa-spin.fa-refresh] Loading
+            span #[i.fa.fa-thumbs-up] Like
+          if currentUser && currentUser.grade == '가이드'
+            | 
+            a.btn.btn-outline-secondary(href=`/tours/${tour.id}/edit`) Edit
+            | 
+            a.btn.btn-outline-danger.need-confirm-btn(href=`/tours/${tour.id}?_method=delete`) Delete
+      
+    if tour.numAnswers > 0
+      hr
+      h3 #{tour.numAnswers} Answer(s)
+      .answers.show
+        each answer in answers
+          include _answer
+
+    if currentUser
+      form(action=`/tours/${tour.id}/answers`, method='POST')
+        .form-group
+          label(for='answer') Your Answer
+          textarea.form-control(name="content", rows="5")
+        button.btn.btn-primary(type="submit") Post Your Answer
+
+  script(src='/javascripts/tour_client.js')
