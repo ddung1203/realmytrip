@@ -1,0 +1,20 @@
+.question.card
+  .numbers.like-badge
+    .number
+      span.number.num-likes= question.numLikes
+    .button
+      a.like.question-like-btn(href='#', data-id=question.id)
+        i.fa.fa-thumbs-up
+        | 
+        | Like
+
+  .card-body
+    .content= question.content
+  .row.card-body
+    .col-sm
+    .col-sm.text-right
+      .author
+        | questioned on #{moment(question.createdAt).format('YYYY-MM-DD')}
+        if question.author
+          | 
+          | by #[a(href=`/users/${question.author.id}`)= question.author.name]

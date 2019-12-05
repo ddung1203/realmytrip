@@ -1,0 +1,52 @@
+extends ../layout
+
+block content
+  .container
+    h1.main-title= tour.title
+
+    .tour.show
+      if tour.img
+        img.img-fluid(src= tour.img)
+      include _tour
+
+      .buttons
+        if currentUser
+          button.btn.btn-primary.tour-like-btn(data-id=tour.id) 
+            span.for-loading #[i.fa.fa-spin.fa-refresh] Loading
+            span #[i.fa.fa-thumbs-up] Like
+          if currentUser && currentUser.grade == '가이드'
+            | 
+            a.btn.btn-outline-secondary(href=`/tours/${tour.id}/edit`) Edit
+            | 
+            a.btn.btn-outline-danger.need-confirm-btn(href=`/tours/${tour.id}?_method=delete`) Delete
+      
+    if tour.numQuestions > 0
+      hr
+      h3 #{tour.numQuestions} Question(s)
+      .questions.show
+        each question in questions
+          include _question
+
+    if currentUser
+      form(action=`/tours/${tour.id}/questions`, method='POST')
+        .form-group
+          label(for='question') Your Question
+          textarea.form-control(name="content", rows="5")
+        button.btn.btn-primary(type="submit") Post Your Question
+        p
+      .pos-f-t
+        #navbarToggleExternalContent.collapse
+          form(action='/reservations', method='POST')
+            .form-group
+              label(for="title") 고유 식별자입니다. 예약확인에서 확인해보세요.
+              input.form-control(type="text", name="title", placeholder= tour.id, readonly, value=tour.id)
+            .form-group
+              label(for="price") 가격: 원(\)
+              input.form-control(type="text", name="price", placeholder= tour.price, readonly, value=tour.id)
+            include ../reservations/new
+        
+        button.btn.btn-outline-primary(type='button', data-toggle='collapse', data-target='#navbarToggleExternalContent', aria-controls='navbarToggleExternalContent', aria-expanded='false', aria-label='Toggle navigation') 펼처서 예약하기
+          span.navbar-toggler-icon
+
+
+  script(src='/javascripts/tour_client.js')

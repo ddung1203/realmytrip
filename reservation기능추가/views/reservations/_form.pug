@@ -1,0 +1,30 @@
+.form-group
+  label(for='numpeople') 최대인원은 10명입니다. 단체는 가이드에게 문의부탁드립니다
+  select#numpeople.form-control(name="numpeople")
+    option 1
+    option 2
+    option 3
+    option 4
+    option 5
+    option 6
+    option 7
+    option 8
+    option 9
+    option 10
+.form-group
+  label(for='rev_name') 예약자의 이름을 적어주세요.
+  input.form-control(type="text", name="rev_name")
+.form-group
+  label(for='phone_no') 예약자의 번호를 적어주세요.
+  input.form-control(type="text", name="phone_no")
+.form-group
+  label(for="start") 투어 시작일
+  input(type='date', value='2019-12-03', min='2019-12-03', max='2100-12-31', name="start")
+.form-group
+  label(for="end") 투어 종료일
+  input(type='date', value='2019-12-03', min='2019-12-03', max='2100-12-31', name="end")
+
+
+
+
+//이름, 전화번호, 이메일, 여권번호 등등, 날짜, 인원
