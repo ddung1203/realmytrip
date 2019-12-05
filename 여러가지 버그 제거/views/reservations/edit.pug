@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+  .container
+    h1.main-title Edit Reservation
+    form(action=`/reservations/${reservation.id}`, method="POST")
+      input(type="hidden", name="_method", value="PUT")
+      .form-group
+        label(for="title") 고유 식별자입니다. 복사후 예약확인에서 확인해보세요.
+        input.form-control(type="text", name="title", placeholder= reservation.id + currentUser._id, readonly, value=reservation.id+ currentUser._id)
+      .form-group
+        label(for="price") 가격: 원(\)
+        input.form-control(type="text", name="price", placeholder= reservation.price, readonly, value= reservation.price)
+      include _form
+      button.btn.btn-outline-primary(type="submit") Update Your Reservation
