@@ -1,0 +1,34 @@
+.review.card
+  .numbers.like-badge
+    .number
+      span.number.num-likes= review.numLikes
+    .button
+      a.like.review-like-btn(href='#', data-id=review.id)
+        i.fa.fa-thumbs-up
+        | 
+        | Like
+  
+  .card-body
+    case review.star
+      when 1
+        p ★
+      when 2
+        p ★★
+      when 3
+        p ★★★
+      when 4
+        p ★★★★
+      when 5
+        p ★★★★★
+      
+    .content= review.content
+      if review.img
+        img.img-fluid(src= review.img)
+  .row.card-body
+    .col-sm
+    .col-sm.text-right
+      .author
+        | reviewed on #{moment(review.createdAt).format('YYYY-MM-DD')}
+        if review.author
+          | 
+          | by #[a(href=`/users/${review.author.id}`)= review.author.name]
