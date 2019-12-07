@@ -1,0 +1,85 @@
+extends layout
+
+block content
+  .resize
+
+  #carouselExampleControls.carousel.slide(data-ride='carousel', style='width: 40em; margin: 0 auto;')
+    .carousel-inner
+      .carousel-item.active(data-interval='2000')
+        img.d-block.w-100(src='/images/barcelona.jpg', alt='barcelona', max-width= '100%')
+      .carousel-item(data-interval='2000')
+        img.d-block.w-100(src='/images/boracay.jpg', alt='boracay', max-width= '100%')
+      .carousel-item(data-interval='2000')
+        img.d-block.w-100(src='/images/hongkong.jpg', alt='hongkong', max-width= '100%')
+      .carousel-item(data-interval='2000')
+        img.d-block.w-100(src='/images/japan.jpg', alt='japan', max-width= '100%')
+      .carousel-item(data-interval='2000')
+        img.d-block.w-100(src='/images/london.jpg', alt='london', max-width= '100%')
+      .carousel-item(data-interval='2000')
+        img.d-block.w-100(src='/images/macau.jpg', alt='macau', max-width= '100%')
+      .carousel-item(data-interval='2000')
+        img.d-block.w-100(src='/images/paris.jpg', alt='paris', max-width= '100%')
+      .carousel-item(data-interval='2000')
+        img.d-block.w-100(src='./images/taiwan.jpg', alt='taiwan', max-width= '100%')
+    a.carousel-control-prev(href='#carouselExampleControls', role='button', data-slide='prev')
+      span.carousel-control-prev-icon(aria-hidden='true')
+      span.sr-only Previous
+    a.carousel-control-next(href='#carouselExampleControls', role='button', data-slide='next')
+      span.carousel-control-next-icon(aria-hidden='true')
+      span.sr-only Next
+
+  br
+  form.form-inline.search-input-group(action='/tours', method='GET', style='width: 40em; margin: 0 auto;')
+    i.fa.fa-search
+    input.form-control.mr-sm-2(type='text', name='term', placeholder='여행지나 상품을 검색해보세요!', aria-label='Search', value=term)
+
+  br
+  br
+  br
+  br
+
+
+  .card-deck(style='width: 70em; height: 30em; margin: 0 auto;')
+    .card
+      img.card-img-top(src='./images/taiwan.jpg', alt='taiwan', style='width: 20em')
+      .card-body
+        h5.card-title 대만을 대표하는 마천루, 타이페이 101 전망대에서 타이페이의 진짜 아름다움을 감상해보세요.
+        p.card-text
+          | 대만 타이페이 101 타워 전망대 입장권 티켓 (국광버스/국립고궁박물관/대만 유심과 함께 구매 시 추가 할인!)
+        a.btn.btn-primary(href='http://localhost:3000/tours/5de3b4ec264bc8441c4dab9d') 바로가기
+    .card
+      img.card-img-top(src='/images/paris.jpg', alt='paris', style='width: 20em')
+      .card-body
+        h5.card-title #파리스냅 :: 파리의 감성 그대로 메르시스냅, 2시간 쁘띠촬영
+        p.card-text 두고두고 바라볼 인생 사진 한 장쯤 남겨야 하는데, 일행은 사진을 너무 못 찍고, 모르는 사람에게 부탁하긴 불안하고, 삼각대를 놓고 찍자니 소매치기가 걱정인 분들께 추천해요^^
+        a.btn.btn-primary(href='http://localhost:3000/tours/5de4c0d16593d249707aa0f2') 바로가기
+    .card
+      img.card-img-top(src='/images/macau.jpg', alt='macau', style='width: 20em')
+      .card-body
+        h5.card-title [투어] 마카오 가이드 겸 유튜버 "마카오권"과 함께 하는 단독 투어 '특가'(마카오)
+        p.card-text
+          | 마카오의 메인인 성바울 성당 + 육포 / 쿠키 거리 + 세나도광장 등을 거쳐 세계 3대 카지노 호텔인 윈 호텔과 MGM호텔의 각종 쇼와 조형물을 구경하시고 셔틀버스를 탑승하여...
+        a.btn.btn-primary(href='http://localhost:3000/tours/5de3b49f264bc8441c4dab9c') 바로가기
+  p
+  .card-deck(style='width: 70em; height: 30em; margin: 0 auto;')
+    .card
+      img.card-img-top(src='/images/london.jpg', alt='london', style='width: 20em')
+      .card-body
+        h5.card-title 런던 : 워너 브라더스 해리포터 스튜디오 투어 (입장권 + 왕복 셔틀버스 포함)
+        p.card-text
+          | 해리포터 팬들의 성지! 호그와트를 그대로 재현한 이 곳에서 신비로운 마법의 세계를 즐겨보세요.
+        a.btn.btn-primary(href='http://localhost:3000/tours/5de3b36c264bc8441c4dab9a') 바로가기
+    .card
+      img.card-img-top(src='/images/japan.jpg', alt='japan', style='width: 20em')
+      .card-body
+        h5.card-title [춘자투어/2명부터 출발!!] 도쿄 후지산 버스투어 / 베니후지 온천 :: 한국인 가이드
+        p.card-text 도쿄 후지산 일일 버스투어(매주 월,수,금,토 출발]
+        a.btn.btn-primary(href='http://localhost:3000/tours/5ddf779c5ed56641c42d7f24') 바로가기
+    .card
+      img.card-img-top(src='/images/hongkong.jpg', alt='hongkong', style='width: 20em')
+      .card-body
+        h5.card-title 홍콩(오후) 돋보기투어 : 소호 미드레벨,빅토리아 피크 백만불야경 (피크트램패스트트랙)
+        p.card-text
+          | 구글지도NO! 시간낭비NO!! 체력소모NO!!! 홍콩최초오후야간 연계투어 도보이동을 최소화한 대중교통 패키지 이반장이 속시원히 해결해드리겠습니다
+        a.btn.btn-primary(href='http://localhost:3000/tours/5de3b314264bc8441c4dab99') 바로가기
+

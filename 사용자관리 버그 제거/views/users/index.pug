@@ -1,0 +1,32 @@
+extends ../layout
+
+block content
+  .container
+    h1.main-title 사용자 목록
+    
+    table.table.table-hover
+      thead
+        tr
+          th 이름
+          th 등급
+          th 이메일
+          th 생성일
+          th
+      tbody
+        each user in users
+          tr
+            td
+              a(href=`/users/${user._id}`)= user.name
+            if (!user.grade)
+              td= '사용자'
+            else
+              td= user.grade
+            td= user.email
+            td= moment(user.createdAt).format('YYYY-MM-DD HH:mm:ss')
+            td
+              a.btn.btn-sm.btn-outline-secondary(href=`/users/${user._id}/edit`) 
+                | #[i.fa.fa-pencil] 편집
+              | 
+              a.btn.btn-sm.need-confirm-btn.btn-outline-danger(href=`/users/${user._id}?_method=DELETE`)
+                | #[i.fa.fa-trash] 삭제
+    a.btn.btn-primary(href='/users/new') #[i.fa.fa-plus] Register a new user

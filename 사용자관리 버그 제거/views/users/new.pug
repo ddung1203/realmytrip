@@ -1,0 +1,33 @@
+extends ../layout
+
+block content
+  .container
+    h3.form-signin-heading 회원가입
+    form(action='/users', method='POST')
+      .form-group
+        label(for='name') 이름
+        input.form-control(type='text', id='name', name='name', placeholder='Your name')
+      .form-group
+        label(for='email') 이메일 주소
+        input.form-control(type='email', id='email', name='email', placeholder='Email')
+      .form-group
+        label(for='password') 비밀번호
+        input.form-control(type='password', id='password', name='password', placeholder='Password')
+      .form-group
+        label(for='password_confirmation') 비밀번호 확인
+        input.form-control(type='password', id='password_confirmation', name='password_confirmation', placeholder='Password')
+    
+      .form-group
+        label(for='grade') 등급
+        p
+        input(type='radio', id='grade', name='grade', value = '사용자')
+        | 사용자
+        input(type='radio', id='grade', name='grade', value = '가이드')
+        | 가이드
+
+      p
+      button.btn.btn-primary(type='submit') 등록
+      | 
+      a.btn.btn-secondary(href='/auth/facebook')
+        i.fa.fa-facebook.fa-lg
+        |     Facebook으로 가입하기
