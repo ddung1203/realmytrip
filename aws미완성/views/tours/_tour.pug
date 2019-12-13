@@ -1,0 +1,19 @@
+br
+| 가격: #{tour.price} 원(\)
+.content= tour.content
+.tags.badges
+  each tag in tour.tags
+    span.badge.badge-phill.badge-secondary= tag
+    | 
+.row
+  .col-sm
+    .numbers.
+      #[span.number.num-votes= tour.numLikes] likes,
+      #[span.number.num-reviews= tour.numReviews] reviews,
+      #[span.number.num-views= tour.numReads] reads
+  .col-sm
+    .author
+      | posted on #{moment(tour.createdAt).format('YYYY-MM-DD')}
+      if tour.author
+        | 
+        | by #[a(href=`/users/${tour.author.id}`)= tour.author.name] 

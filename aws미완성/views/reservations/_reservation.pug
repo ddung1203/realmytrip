@@ -1,0 +1,19 @@
+br
+| 예약인원: #{reservation.numpeople} 명
+br
+| 여행 시작날짜: #{moment(reservation.start).format('YYYY-MM-DD')}
+br
+| 여행 종료날짜: #{moment(reservation.end).format('YYYY-MM-DD')}
+br
+| 성함: #{reservation.rev_name} 님
+br
+| 연락: #{reservation.phone_no}
+br
+| 최종가격: #{reservation.price * reservation.numpeople} 원(\)
+
+.row
+  .col-sm
+    .author
+      | reservated on #{moment(reservation.createdAt).format('YYYY-MM-DD')}
+      | by #[a(href=`/users/${reservation.author.id}`)= reservation.author.name] 
+
