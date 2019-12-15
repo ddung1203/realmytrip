@@ -1,0 +1,58 @@
+.form-group
+  label(for="title") Title
+  input.form-control(type="text", name="title", placeholder="What's your tour?", value=tour.title)
+.form-group
+  label(for="tour") Tour
+  textarea#editor1(name='content', rows='10', cols='80')= tour.content
+.form-group
+  label(for="price") Price: Won(\)
+  input.form-control(type="text", name="price", placeholder= tour.price, value=tour.price)
+.form-group
+  label(for="img") Image
+  input#file.form-control(type="file")
+  input#url.form-control(type="text", readonly="readonly", name="img", value="")
+  img#preview.img-fluid(src="https://dummyimage.com/200x200/ccc/fff") 
+  
+script.
+  $(function() {
+    $("#preview").hide();
+    $("#file").change(function() {
+      var file = $("#file")[0].files[0];
+      if (file) {
+        var url = "/s3?filename=" + encodeURIComponent(file.name) + 
+                  "&type=" + encodeURIComponent(file.type);
+        console.log(url);
+        $.getJSON(url, function(resp) {
+          console.log(resp.signedRequest);
+          $.ajax({
+            url: resp.signedRequest,
+            method: 'PUT',
+            data: file,
+            headers: {'x-amz-acl': 'public-read', 'Content-Type': file.type},
+            processData: false, 
+            contentType: file.type,
+            success: function() {
+              $("#preview").attr("src", resp.url).show();
+              $("#url").val(resp.url);
+            }
+          });
+        });
+      }
+    });
+  });
+
+
+  
+.form-group
+  label(for="tags") Tags
+  input.form-control(type="text", name="tags", placeholder="tags separated by spaces", value=tour.tags ? tour.tags.join(" ") : "")
+
+script(type='text/javascript').
+  // Replace the <textarea id="editor1"> with a CKEditor
+  // instance, using default configuration.
+  CKEDITOR.config.autoParagraph = false;
+  CKEDITOR.config.enterMode = CKEDITOR.ENTER_BR;
+  CKEDITOR.config.htmlEncodeOutput = false;
+  CKEDITOR.config.entities = false;
+  CKEDITOR.replace( 'editor1' );
+  
