@@ -1,0 +1,70 @@
+extends ../layout
+
+block content
+  .container
+    h1.main-title= tour.title
+
+    .tour.show
+      if tour.img
+        img.img-fluid(src= tour.img)
+      include _tour
+
+      .buttons
+        if currentUser
+          button.btn.btn-primary.tour-like-btn(data-id=tour.id) 
+            span #[i.fa.fa-thumbs-up] Like
+          if tour.author.id == currentUser.id
+            | 
+            a.btn.btn-outline-secondary(href=`/tours/${tour.id}/edit`) Edit
+            | 
+            a.btn.btn-outline-danger.need-confirm-btn(href=`/tours/${tour.id}?_method=delete`) Delete
+
+          if currentUser && currentUser.grade == '관리자'
+            | 
+            a.btn.btn-outline-secondary(href=`/tours/${tour.id}/edit`) Edit
+            | 
+            a.btn.btn-outline-danger.need-confirm-btn(href=`/tours/${tour.id}?_method=delete`) Delete
+      
+    if tour.numReviews > 0
+      hr
+      h3 #{tour.numReviews} Review(s)
+      .reviews.show
+        each review in reviews
+          include _review
+
+    if currentUser
+      form(action=`/tours/${tour.id}/reviews`, method='POST')
+        .form-group
+          label(for='star') 별점으로 평가해주세요!
+          input(type='radio', id='star', name='star', value = '1')
+          |  1
+          input(type='radio', id='star', name='star', value = '2')
+          |  2
+          input(type='radio', id='star', name='star', value = '3')
+          |  3
+          input(type='radio', id='star', name='star', value = '4')
+          |  4
+          input(type='radio', id='star', name='star', value = '5')
+          |  5
+        .form-group
+          label(for='review') Your Review
+          textarea.form-control(name="content", rows="5")
+        button.btn.btn-primary(type="submit") Post Your Review
+        
+        p
+      .pos-f-t
+        #navbarToggleExternalContent.collapse
+          form(action='/reservations', method='POST')
+            .form-group
+              label(for="title") 고유 식별자입니다. 복사후 예약확인에서 확인해보세요.
+              input.form-control(type="text", name="title", placeholder= tour.id + currentUser.id, readonly, value=tour.id + currentUser.id)
+            .form-group
+              label(for="price") 가격: 원(\)
+              input.form-control(type="text", name="price", placeholder= tour.price, readonly, value= tour.price)
+            include ../reservations/new
+        
+        button.btn.btn-outline-primary(type='button', data-toggle='collapse', data-target='#navbarToggleExternalContent', aria-controls='navbarToggleExternalContent', aria-expanded='false', aria-label='Toggle navigation') 펼처서 예약하기
+          span.navbar-toggler-icon
+
+
+  script(src='/javascripts/tour_client.js')

@@ -1,0 +1,26 @@
+extends ../layout
+
+include ../includes/_paginate
+
+block content
+  .container
+    form.form-inline.search-input-group(action='/reservations', method='GET')
+      i.fa.fa-search
+      input.form-control.mr-sm-2(type='text', name='term', placeholder='고유 투어 id를 입력해주세요', aria-label='Search', value=term)
+
+    h1.main-title 
+      | Reservation
+      if reservations.total > 0
+        .small Total #{reservations.total} reservation(s)
+
+    if reservations.total <= 0 
+      .alert.alert-info No reservations yet
+    else
+      .reservations
+        each reservation in reservations.docs
+          .reservation
+            a.title(href=`/reservations/${reservation.id}`)= reservation.title
+            include _reservation
+
+      +paginate(reservations, '/reservations', query)
+

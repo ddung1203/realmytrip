@@ -1,0 +1,26 @@
+extends ../layout
+
+block content
+  .container
+    h1.main-title= reservation.title
+
+    .reservation.show
+      include _reservation
+
+      .buttons
+        if currentUser && currentUser.grade == '가이드'
+          | 
+          a.btn.btn-outline-secondary(href=`/reservations/${reservation.id}/edit`) Edit
+          | 
+          a.btn.btn-outline-danger.need-confirm-btn(href=`/reservations/${reservation.id}?_method=delete`) Delete
+        if  currentUser && currentUser.grade =='관리자'
+          | 
+          a.btn.btn-outline-secondary(href=`/reservations/${reservation.id}/edit`) Edit
+          | 
+          a.btn.btn-outline-danger.need-confirm-btn(href=`/reservations/${reservation.id}?_method=delete`) Delete
+        if currentUser
+          if reservation.author.id == currentUser._id
+            | 
+            a.btn.btn-outline-secondary(href=`/reservations/${reservation.id}/edit`) Edit
+      .buttons
+        
