@@ -113,7 +113,7 @@ router.post('/', needAuth, upload.single('img'), catchErrors(async (req, res, ne
     const dest = path.join(__dirname, '../public/images/uploads/');
     console.log("File ->", req.file);
     const filename = req.file.filename + "." + mimetypes[req.file.mimetype];
-    await s3.upload(req.file.path, dest + filename);
+    await fs.move(req.file.path, dest + filename);
     tour.img = "/images/uploads/" + filename;
   }
   await tour.save();

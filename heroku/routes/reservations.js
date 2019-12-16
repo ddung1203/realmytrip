@@ -104,7 +104,7 @@ router.post('/', needAuth, catchErrors(async (req, res, next) => {//몽고에서
 
   await reservation.save();
   req.flash('success', 'Successfully posted');
-  res.redirect('/reservations');
+  res.redirect('/tours');
 }));
 
 router.post('/:id/reviews', needAuth, catchErrors(async (req, res, next) => {

@@ -62,6 +62,8 @@ block content
               label(for="price") 가격: 원(\)
               input.form-control(type="text", name="price", placeholder= tour.price, readonly, value= tour.price)
             include ../reservations/new
+            .form-group
+              input.form-control(type="text", name="guide", hidden)
         
         button.btn.btn-outline-primary(type='button', data-toggle='collapse', data-target='#navbarToggleExternalContent', aria-controls='navbarToggleExternalContent', aria-expanded='false', aria-label='Toggle navigation') 펼처서 예약하기
           span.navbar-toggler-icon

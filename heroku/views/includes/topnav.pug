@@ -6,8 +6,17 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
     ul.navbar-nav.ml-auto
       li.nav-item
         a.nav-link(href='/tours').active 투어
-      li.nav-item
-        a.nav-link(href='/reservations').active 예약확인
+        
+      if currentUser && currentUser.grade =='관리자'
+        li.nav-item
+          a.nav-link(href='/reservations').active 예약확인
+      if currentUser && currentUser.grade =='가이드'
+        li.nav-item
+          a.nav-link(href='/reservations').active 예약확인
+      else if currentUser
+        li.nav-item
+          a.nav-link(href=`/reservations/?term=${currentUser._id}`).active 예약확인
+      
       if (!currentUser)
         li.nav-item
           a.nav-link(href='/signin') 로그인
