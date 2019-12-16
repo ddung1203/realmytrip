@@ -31,10 +31,13 @@ module.exports = function(passport) {//module.exports로 하는게 이 object가
     'https://obscure-citadel-78088.herokuapp.com/auth/facebook/callback' :
     'http://localhost:3000/auth/facebook/callback';
 
+  const clientID = '185081248729582' && '1202055523314324';
+  const clientSecret = 'f02d8be90007cf67bd16495033e1b95a' && '326c84cace30e7761f76b1b2aacd84e9';
+
   passport.use(new FacebookStrategy({//모듈을 그냥 사용, 정보를 수정해야함
     // 이 부분을 여러분 Facebook App의 정보로 수정해야 합니다.
-    clientID : '1202055523314324',
-    clientSecret : '326c84cace30e7761f76b1b2aacd84e9',
+    clientID : clientID,
+    clientSecret : clientSecret,
     callbackURL : callbackURL,
     profileFields : ['email', 'name', 'picture']
   }, async (token, refreshToken, profile, done) => {
