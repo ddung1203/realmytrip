@@ -3,8 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
-		"bundle": "rimraf dist && webpack --config  webpack.config.js && node bundle.ts"
+    "start": "nodemon ./bin/www"
   },
   "dependencies": {
     "async-error-catcher": "^1.2.0",
