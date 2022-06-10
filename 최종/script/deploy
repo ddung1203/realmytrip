@@ -1,5 +1,5 @@
 #!/bin/sh
-sshpass -p $passwd ssh ubuntu@3.34.201.34 <<EOF	//CC2-user에 자신이 만든 ec2인스턴스 종류 넣어줌. 나는 ubuntu
+ssh ubuntu@3.34.201.34 <<EOF	//CC2-user에 자신이 만든 ec2인스턴스 종류 넣어줌. 나는 ubuntu
     cd ~/realmytrip/최종		//프로젝트를 풀받은 ec2에 들어있는 프로젝트이름
     git pull origin master
     curl -o-   https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh    | bash
