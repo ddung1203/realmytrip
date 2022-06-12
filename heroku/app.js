@@ -32,7 +32,7 @@ module.exports =(app, io) => {
   mongoose.Promise = global.Promise;
   const connStr = 'mongodb+srv://project:project@cluster0-clfxh.mongodb.net/test?retryWrites=true&w=majority';
 
-  mongoose.connect(connStr, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
+  mongoose.connect(connStr, { useNewUrlParser: true, useUnifiedTopology: true });
   mongoose.connection.on('error', console.error);
 
   app.use(logger('dev'));
