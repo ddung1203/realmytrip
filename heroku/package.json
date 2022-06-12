@@ -27,6 +27,6 @@
     "passport": "^0.6.0",
     "passport-facebook": "^3.0.0",
     "passport-local": "^1.0.0",
-    "pug": "^3.0.2"
+    "pug": "^3.0.1"
   }
 }
